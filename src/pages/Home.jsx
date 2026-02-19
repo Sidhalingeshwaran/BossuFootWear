@@ -85,7 +85,7 @@ export default function Home() {
                     </div>
                     <div className="hero-visual">
                         <div className="hero-logo-glow" />
-                        <img src="/logo.png" alt="Bossu Footwear" className="hero-logo-img" />
+                        <img src="https://res.cloudinary.com/dtbjdbbtk/image/upload/v1771525735/Gemini_Generated_Image_i7u7edi7u7edi7u7_rxvd9z.png" alt="Bossu Footwear" className="hero-logo-img" />
                     </div>
                 </div>
                 <div className="hero-scroll-indicator">

@@ -19,7 +19,7 @@ export default function Navbar() {
             <div className="container navbar-inner">
                 {/* Logo */}
                 <Link to="/" className="navbar-logo" onClick={closeMobile}>
-                    <img src="/logo.png" alt="Bossu Footwear" className="navbar-logo-img" />
+                    <img src="https://res.cloudinary.com/dtbjdbbtk/image/upload/v1771525735/Gemini_Generated_Image_i7u7edi7u7edi7u7_rxvd9z.png" alt="Bossu Footwear" className="navbar-logo-img" />
                     <div className="navbar-logo-text">
                         <span className="navbar-brand">BOSSU</span>
                         <span className="navbar-sub">FootWear</span>
