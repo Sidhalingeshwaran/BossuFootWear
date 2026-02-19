@@ -7,6 +7,7 @@ const ADMIN_PASSWORD = 'bossu2024';
 export default function Admin() {
     const {
         products,
+        loading,
         addProduct,
         deleteProduct,
         updateStock,

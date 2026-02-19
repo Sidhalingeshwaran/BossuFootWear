@@ -6,11 +6,22 @@ import './ProductDetail.css';
 
 export default function ProductDetail() {
     const { id } = useParams();
-    const { getProduct, getFilteredProducts } = useProducts();
+    const { getProduct, getFilteredProducts, loading } = useProducts();
     const product = getProduct(id);
 
     const [selectedImage, setSelectedImage] = useState(0);
     const [selectedSize, setSelectedSize] = useState(null);
+
+    if (loading) {
+        return (
+            <div className="detail-page" style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ textAlign: 'center', color: 'var(--text-secondary)' }}>
+                    <div className="loader-spinner" />
+                    <p style={{ marginTop: '1rem' }}>Loading product...</p>
+                </div>
+            </div>
+        );
+    }
 
     if (!product) {
         return (

@@ -5,9 +5,20 @@ import { ScrollReveal, StaggerReveal } from '../hooks/useScrollReveal';
 import './Home.css';
 
 export default function Home() {
-    const { products } = useProducts();
+    const { products, loading } = useProducts();
 
     const featured = products.slice(0, 8);
+
+    if (loading) {
+        return (
+            <div className="home" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ textAlign: 'center', color: 'var(--text-secondary)' }}>
+                    <div className="loader-spinner" />
+                    <p style={{ marginTop: '1rem', fontSize: '1.1rem' }}>Loading products...</p>
+                </div>
+            </div>
+        );
+    }
 
     const categories = [
         {

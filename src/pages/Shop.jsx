@@ -5,7 +5,7 @@ import ProductCard from '../components/ProductCard';
 import './Shop.css';
 
 export default function Shop() {
-    const { getFilteredProducts, getCategories, getTypes } = useProducts();
+    const { getFilteredProducts, getCategories, getTypes, loading } = useProducts();
     const [searchParams, setSearchParams] = useSearchParams();
 
     const [filters, setFilters] = useState({

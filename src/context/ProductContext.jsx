@@ -1,63 +1,106 @@
 import { createContext, useContext, useState, useEffect } from 'react';
+import {
+    collection,
+    doc,
+    setDoc,
+    deleteDoc,
+    updateDoc,
+    onSnapshot,
+    getDocs,
+    writeBatch,
+} from 'firebase/firestore';
+import { db } from '../firebase';
 import INITIAL_PRODUCTS from '../data/products';
 
 const ProductContext = createContext();
 
-const STORAGE_KEY = 'bossu_products';
+const PRODUCTS_COLLECTION = 'products';
 
 export function ProductProvider({ children }) {
-    const [products, setProducts] = useState(() => {
-        try {
-            const stored = localStorage.getItem(STORAGE_KEY);
-            if (stored) {
-                return JSON.parse(stored);
-            }
-        } catch (e) {
-            console.error('Error reading products from localStorage:', e);
-        }
-        return INITIAL_PRODUCTS;
-    });
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    // Persist to localStorage whenever products change
+    // Real-time listener — syncs Firestore → local state for ALL users
     useEffect(() => {
-        try {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
-        } catch (e) {
-            console.error('Error saving products to localStorage:', e);
-        }
-    }, [products]);
+        const productsRef = collection(db, PRODUCTS_COLLECTION);
 
-    const addProduct = (product) => {
+        const unsubscribe = onSnapshot(productsRef, async (snapshot) => {
+            if (snapshot.empty) {
+                // First time: seed Firestore with default products
+                try {
+                    const batch = writeBatch(db);
+                    INITIAL_PRODUCTS.forEach((product) => {
+                        const docRef = doc(productsRef, String(product.id));
+                        batch.set(docRef, product);
+                    });
+                    await batch.commit();
+                    // onSnapshot will fire again after seeding — products will load then
+                } catch (e) {
+                    console.error('Error seeding products:', e);
+                    // Fallback to hardcoded data if Firestore fails
+                    setProducts(INITIAL_PRODUCTS);
+                }
+            } else {
+                const productsData = snapshot.docs.map((doc) => ({
+                    ...doc.data(),
+                    _docId: doc.id,
+                }));
+                // Sort by id to maintain consistent order
+                productsData.sort((a, b) => a.id - b.id);
+                setProducts(productsData);
+            }
+            setLoading(false);
+        }, (error) => {
+            console.error('Firestore listener error:', error);
+            // Fallback to hardcoded data
+            setProducts(INITIAL_PRODUCTS);
+            setLoading(false);
+        });
+
+        return () => unsubscribe();
+    }, []);
+
+    const addProduct = async (product) => {
         const newProduct = {
             ...product,
             id: Date.now(),
         };
-        setProducts((prev) => [...prev, newProduct]);
+        try {
+            const docRef = doc(collection(db, PRODUCTS_COLLECTION), String(newProduct.id));
+            await setDoc(docRef, newProduct);
+        } catch (e) {
+            console.error('Error adding product:', e);
+        }
         return newProduct;
     };
 
-    const updateProduct = (id, updates) => {
-        setProducts((prev) =>
-            prev.map((p) => (p.id === id ? { ...p, ...updates } : p))
-        );
+    const updateProduct = async (id, updates) => {
+        try {
+            const docRef = doc(db, PRODUCTS_COLLECTION, String(id));
+            await updateDoc(docRef, updates);
+        } catch (e) {
+            console.error('Error updating product:', e);
+        }
     };
 
-    const deleteProduct = (id) => {
-        setProducts((prev) => prev.filter((p) => p.id !== id));
+    const deleteProduct = async (id) => {
+        try {
+            const docRef = doc(db, PRODUCTS_COLLECTION, String(id));
+            await deleteDoc(docRef);
+        } catch (e) {
+            console.error('Error deleting product:', e);
+        }
     };
 
-    const updateStock = (id, size, newStock) => {
-        setProducts((prev) =>
-            prev.map((p) => {
-                if (p.id === id) {
-                    return {
-                        ...p,
-                        sizes: { ...p.sizes, [size]: Math.max(0, newStock) },
-                    };
-                }
-                return p;
-            })
-        );
+    const updateStock = async (id, size, newStock) => {
+        try {
+            const docRef = doc(db, PRODUCTS_COLLECTION, String(id));
+            await updateDoc(docRef, {
+                [`sizes.${size}`]: Math.max(0, newStock),
+            });
+        } catch (e) {
+            console.error('Error updating stock:', e);
+        }
     };
 
     const getProduct = (id) => products.find((p) => p.id === Number(id));
@@ -85,14 +128,32 @@ export function ProductProvider({ children }) {
     const getCategories = () => [...new Set(products.map((p) => p.category))];
     const getTypes = () => [...new Set(products.map((p) => p.type))];
 
-    const resetProducts = () => {
-        setProducts(INITIAL_PRODUCTS);
+    const resetProducts = async () => {
+        try {
+            // Delete all existing products
+            const productsRef = collection(db, PRODUCTS_COLLECTION);
+            const snapshot = await getDocs(productsRef);
+            const batch = writeBatch(db);
+            snapshot.docs.forEach((doc) => batch.delete(doc.ref));
+            await batch.commit();
+
+            // Re-seed with defaults
+            const seedBatch = writeBatch(db);
+            INITIAL_PRODUCTS.forEach((product) => {
+                const docRef = doc(productsRef, String(product.id));
+                seedBatch.set(docRef, product);
+            });
+            await seedBatch.commit();
+        } catch (e) {
+            console.error('Error resetting products:', e);
+        }
     };
 
     return (
         <ProductContext.Provider
             value={{
                 products,
+                loading,
                 addProduct,
                 updateProduct,
                 deleteProduct,
