@@ -1,0 +1,310 @@
+.admin-page {
+    padding-top: calc(var(--header-height) + 30px);
+    min-height: 100vh;
+    padding-bottom: 60px;
+}
+
+/* Login */
+.admin-login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - var(--header-height) - 100px);
+}
+
+.admin-login {
+    width: 100%;
+    max-width: 400px;
+    padding: 48px 36px;
+    text-align: center;
+}
+
+.login-icon {
+    font-size: 3rem;
+    margin-bottom: 16px;
+}
+
+.login-title {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--color-gold), var(--color-gold-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 6px;
+}
+
+.login-subtitle {
+    color: var(--color-text-muted);
+    font-size: 0.88rem;
+    margin-bottom: 28px;
+}
+
+.login-form .form-group {
+    margin-bottom: 16px;
+}
+
+.login-error {
+    color: var(--color-danger);
+    font-size: 0.82rem;
+    margin-bottom: 12px;
+}
+
+.login-btn {
+    width: 100%;
+}
+
+/* Header */
+.admin-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.admin-title {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--color-gold), var(--color-gold-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.admin-subtitle {
+    color: var(--color-text-muted);
+    font-size: 0.88rem;
+    margin-top: 4px;
+}
+
+.admin-header-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Toast */
+.admin-toast {
+    position: fixed;
+    top: calc(var(--header-height) + 10px);
+    right: 20px;
+    z-index: 1100;
+    padding: 12px 24px;
+    background: rgba(76, 175, 80, 0.15);
+    border: 1px solid var(--color-success);
+    color: var(--color-success);
+    border-radius: var(--radius-md);
+    font-size: 0.88rem;
+    font-weight: 500;
+    backdrop-filter: blur(12px);
+}
+
+/* Tabs */
+.admin-tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 24px;
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-md);
+    padding: 4px;
+    border: 1px solid var(--color-border);
+}
+
+.admin-tab {
+    flex: 1;
+    padding: 12px 20px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+    text-align: center;
+}
+
+.admin-tab:hover {
+    color: var(--color-text);
+}
+
+.admin-tab.active {
+    background: rgba(201, 169, 78, 0.12);
+    color: var(--color-gold);
+}
+
+/* Table */
+.admin-table-wrapper {
+    overflow-x: auto;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 900px;
+}
+
+.admin-table th {
+    padding: 14px 12px;
+    text-align: left;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    background: var(--color-bg-secondary);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.admin-table td {
+    padding: 12px;
+    font-size: 0.88rem;
+    border-bottom: 1px solid var(--color-border);
+    vertical-align: middle;
+}
+
+.admin-table tbody tr:hover {
+    background: var(--color-bg-glass);
+}
+
+.admin-product-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin-product-thumb {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+}
+
+.admin-product-name {
+    font-weight: 500;
+    color: var(--color-text);
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.admin-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    background: rgba(201, 169, 78, 0.1);
+    color: var(--color-gold);
+    font-size: 0.72rem;
+    font-weight: 600;
+    border-radius: 12px;
+    text-transform: uppercase;
+}
+
+.admin-price {
+    font-weight: 600;
+    color: var(--color-gold);
+}
+
+.stock-input {
+    width: 56px;
+    padding: 6px 8px;
+    background: var(--color-bg-tertiary);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    font-size: 0.85rem;
+    text-align: center;
+    transition: border-color var(--transition-fast);
+}
+
+.stock-input:focus {
+    border-color: var(--color-gold);
+}
+
+/* Empty */
+.admin-empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--color-text-muted);
+}
+
+.admin-empty p {
+    margin-bottom: 16px;
+}
+
+/* Add Product */
+.admin-add {
+    padding: 32px;
+}
+
+.add-title {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--color-gold);
+    margin-bottom: 24px;
+}
+
+.add-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.form-full {
+    grid-column: 1 / -1;
+}
+
+.stock-heading {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 24px 0 12px;
+}
+
+.stock-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+}
+
+.stock-field {
+    flex: 1;
+    min-width: 80px;
+}
+
+.stock-field label {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--color-text-muted);
+    margin-bottom: 4px;
+    text-align: center;
+}
+
+.add-submit-btn {
+    width: 100%;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .admin-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .admin-header-actions {
+        flex-wrap: wrap;
+    }
+
+    .add-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-title {
+        font-size: 1.5rem;
+    }
+}
