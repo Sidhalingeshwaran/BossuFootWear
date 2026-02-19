@@ -259,7 +259,8 @@
 .hero-logo-img {
     width: 340px;
     height: 340px;
-    object-fit: contain;
+    object-fit: cover;
+    border-radius: 50%;
     filter: drop-shadow(0 0 60px rgba(201, 169, 78, 0.2));
     animation: logo-float 6s ease-in-out infinite;
     position: relative;
