@@ -11,7 +11,7 @@ export default function Footer() {
                     {/* Brand */}
                     <div className="footer-brand">
                         <div className="footer-logo">
-                            <img src="https://res.cloudinary.com/dtbjdbbtk/image/upload/v1771525735/Gemini_Generated_Image_i7u7edi7u7edi7u7_rxvd9z.png" alt="Bossu Footwear" className="footer-logo-img" />
+                            <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Bossu Footwear" className="footer-logo-img" />
                             <div>
                                 <h3 className="footer-brand-name">BOSSU</h3>
                                 <span className="footer-brand-sub">FootWear</span>
