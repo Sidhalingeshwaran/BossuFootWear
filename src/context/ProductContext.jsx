@@ -45,6 +45,28 @@ export function ProductProvider({ children }) {
                     ...doc.data(),
                     _docId: doc.id,
                 }));
+
+                // Auto-generate MRP for products that don't have one
+                const mrpMarkups = [899, 999, 1299];
+                const productsNeedingMrp = productsData.filter((p) => !p.mrp && p.price);
+                if (productsNeedingMrp.length > 0) {
+                    try {
+                        const batch = writeBatch(db);
+                        productsNeedingMrp.forEach((p) => {
+                            const markup = mrpMarkups[Math.floor(Math.random() * mrpMarkups.length)];
+                            const generatedMrp = p.price + markup;
+                            const docRef = doc(db, PRODUCTS_COLLECTION, p._docId);
+                            batch.update(docRef, { mrp: generatedMrp });
+                            // Also update local data immediately
+                            p.mrp = generatedMrp;
+                        });
+                        await batch.commit();
+                        console.log(`Auto-generated MRP for ${productsNeedingMrp.length} products`);
+                    } catch (e) {
+                        console.error('Error auto-generating MRP:', e);
+                    }
+                }
+
                 // Sort by id to maintain consistent order
                 productsData.sort((a, b) => a.id - b.id);
                 setProducts(productsData);
