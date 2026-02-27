@@ -9,6 +9,14 @@
     transform: translateY(-6px);
 }
 
+.pc-link {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    text-decoration: none;
+    color: inherit;
+}
+
 /* Image */
 .pc-image-wrapper {
     position: relative;
@@ -93,6 +101,7 @@
 /* Info */
 .pc-info {
     padding: 16px;
+    flex: 1;
 }
 
 .pc-type {
@@ -152,4 +161,27 @@
 
 .pc-stock.out {
     color: var(--color-danger);
+}
+
+/* Meesho Button on each card */
+.pc-meesho-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 16px;
+    margin: 0 16px 16px;
+    background: #E5235A;
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+    text-decoration: none;
+}
+
+.pc-meesho-btn:hover {
+    background: #c91e4f;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 12px rgba(229, 35, 90, 0.35);
 }

@@ -169,6 +169,17 @@ export default function ProductDetail() {
                                 </svg>
                                 Order via WhatsApp
                             </a>
+                            <a
+                                href="https://www.meesho.com/bossu-footwear"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn detail-meesho-btn"
+                            >
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-8 2.75c1.24 0 2.25 1.01 2.25 2.25s-1.01 2.25-2.25 2.25S9.75 10.24 9.75 9s1.01-2.25 2.25-2.25zM17 17H7v-1.5c0-1.67 3.33-2.5 5-2.5s5 .83 5 2.5V17z" />
+                                </svg>
+                                Buy on Meesho
+                            </a>
                         </div>
 
                         {!selectedSize && (

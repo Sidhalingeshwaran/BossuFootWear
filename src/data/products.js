@@ -8,7 +8,7 @@ const PRODUCTS = [
     name: 'Royal Oxford Classic',
     type: 'Formals',
     category: 'Men',
-    mrp: 4999,
+    mrp: 4498,
     price: 3499,
     description: 'Premium handcrafted leather oxford shoes with brogue detailing. Perfect for formal occasions and business meetings.',
     images: [
@@ -22,7 +22,7 @@ const PRODUCTS = [
     name: 'Urban Runner Pro',
     type: 'Sneakers',
     category: 'Men',
-    mrp: 3999,
+    mrp: 3798,
     price: 2799,
     description: 'Lightweight mesh sneakers with premium cushioned sole. Designed for everyday comfort and street style.',
     images: [
@@ -36,7 +36,7 @@ const PRODUCTS = [
     name: 'Baggy Street King',
     type: 'Baggy Shoes',
     category: 'Men',
-    mrp: 3299,
+    mrp: 3198,
     price: 2299,
     description: 'Oversized baggy silhouette streetwear shoes with chunky sole and breathable upper. A bold statement piece.',
     images: [
@@ -50,7 +50,7 @@ const PRODUCTS = [
     name: 'Comfort Cloud Slides',
     type: 'Sliders',
     category: 'Men',
-    mrp: 1299,
+    mrp: 1798,
     price: 899,
     description: 'Ultra-soft EVA foam slides with textured footbed for maximum comfort. Ideal for casual outings and home relaxation.',
     images: [
@@ -64,7 +64,7 @@ const PRODUCTS = [
     name: 'Heritage Leather Sandals',
     type: 'Sandals',
     category: 'Men',
-    mrp: 2299,
+    mrp: 2598,
     price: 1599,
     description: 'Classic leather sandals with adjustable straps and cushioned insole. Timeless design with a modern edge.',
     images: [
@@ -80,7 +80,7 @@ const PRODUCTS = [
     name: 'Elegance Stiletto',
     type: 'Formals',
     category: 'Women',
-    mrp: 5499,
+    mrp: 4998,
     price: 3999,
     description: 'Sophisticated formal heels crafted from premium leather. Features a comfortable block heel and elegant pointed toe.',
     images: [
@@ -94,7 +94,7 @@ const PRODUCTS = [
     name: 'Blossom Sneaker',
     type: 'Sneakers',
     category: 'Women',
-    mrp: 3599,
+    mrp: 3498,
     price: 2599,
     description: 'Stylish women\'s sneakers with floral accents and memory foam insole. Perfect blend of fashion and comfort.',
     images: [
@@ -108,7 +108,7 @@ const PRODUCTS = [
     name: 'Velvet Comfort Slippers',
     type: 'Slippers',
     category: 'Women',
-    mrp: 1199,
+    mrp: 1698,
     price: 799,
     description: 'Plush velvet indoor slippers with anti-slip sole. Wrapped in luxury for your home comfort.',
     images: [
@@ -122,7 +122,7 @@ const PRODUCTS = [
     name: 'Boho Chic Sandals',
     type: 'Sandals',
     category: 'Women',
-    mrp: 2699,
+    mrp: 2898,
     price: 1899,
     description: 'Handcrafted bohemian-style sandals with beaded straps and cork footbed. Perfect for summer vibes.',
     images: [
@@ -138,7 +138,7 @@ const PRODUCTS = [
     name: 'Little Champ Sneakers',
     type: 'Sneakers',
     category: 'Kids',
-    mrp: 2199,
+    mrp: 2498,
     price: 1499,
     description: 'Colorful lightweight sneakers for active kids. Extra cushioning and easy velcro closure with fun designs.',
     images: [
@@ -152,7 +152,7 @@ const PRODUCTS = [
     name: 'Tiny Explorer Sandals',
     type: 'Sandals',
     category: 'Kids',
-    mrp: 1499,
+    mrp: 1898,
     price: 999,
     description: 'Durable kids\' sandals with protective toe cap and adjustable straps. Built for adventure and playtime.',
     images: [
@@ -166,7 +166,7 @@ const PRODUCTS = [
     name: 'School Day Formals',
     type: 'Formals',
     category: 'Kids',
-    mrp: 2499,
+    mrp: 2698,
     price: 1799,
     description: 'Smart formal shoes for school and special occasions. Polished faux-leather with comfortable padded insole.',
     images: [
@@ -180,7 +180,7 @@ const PRODUCTS = [
     name: 'Splash Proof Sliders',
     type: 'Sliders',
     category: 'Kids',
-    mrp: 899,
+    mrp: 1598,
     price: 599,
     description: 'Waterproof sliders for kids in vibrant colors. Anti-slip sole for pool and beach safety.',
     images: [
@@ -194,7 +194,7 @@ const PRODUCTS = [
     name: 'Chunky Street Baggy',
     type: 'Baggy Shoes',
     category: 'Men',
-    mrp: 4299,
+    mrp: 3898,
     price: 2999,
     description: 'Bold chunky platform baggy shoes with thick soles and oversized tongue. Stand out in the crowd.',
     images: [
