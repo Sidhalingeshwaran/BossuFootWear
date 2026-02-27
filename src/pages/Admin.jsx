@@ -68,7 +68,7 @@ export default function Admin() {
             name: form.name,
             type: form.type,
             category: form.category,
-            mrp: Number(form.mrp) || Number(form.price),
+            mrp: Number(form.mrp) || (Number(form.price) + [899, 999, 1299][Math.floor(Math.random() * 3)]),
             price: Number(form.price),
             description: form.description,
             images: [form.image1, form.image2 || form.image1],
