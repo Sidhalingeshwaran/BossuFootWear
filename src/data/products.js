@@ -1,5 +1,5 @@
 // Product data for Bossu Footwear
-// Each product has 2 images, available sizes (6-10), and stock per size
+// Each product has 2 images, available sizes, stock per size, MRP & offer price
 
 const PRODUCTS = [
   // ===== MEN =====
@@ -8,6 +8,7 @@ const PRODUCTS = [
     name: 'Royal Oxford Classic',
     type: 'Formals',
     category: 'Men',
+    mrp: 4999,
     price: 3499,
     description: 'Premium handcrafted leather oxford shoes with brogue detailing. Perfect for formal occasions and business meetings.',
     images: [
@@ -21,6 +22,7 @@ const PRODUCTS = [
     name: 'Urban Runner Pro',
     type: 'Sneakers',
     category: 'Men',
+    mrp: 3999,
     price: 2799,
     description: 'Lightweight mesh sneakers with premium cushioned sole. Designed for everyday comfort and street style.',
     images: [
@@ -34,6 +36,7 @@ const PRODUCTS = [
     name: 'Baggy Street King',
     type: 'Baggy Shoes',
     category: 'Men',
+    mrp: 3299,
     price: 2299,
     description: 'Oversized baggy silhouette streetwear shoes with chunky sole and breathable upper. A bold statement piece.',
     images: [
@@ -47,6 +50,7 @@ const PRODUCTS = [
     name: 'Comfort Cloud Slides',
     type: 'Sliders',
     category: 'Men',
+    mrp: 1299,
     price: 899,
     description: 'Ultra-soft EVA foam slides with textured footbed for maximum comfort. Ideal for casual outings and home relaxation.',
     images: [
@@ -60,6 +64,7 @@ const PRODUCTS = [
     name: 'Heritage Leather Sandals',
     type: 'Sandals',
     category: 'Men',
+    mrp: 2299,
     price: 1599,
     description: 'Classic leather sandals with adjustable straps and cushioned insole. Timeless design with a modern edge.',
     images: [
@@ -75,52 +80,56 @@ const PRODUCTS = [
     name: 'Elegance Stiletto',
     type: 'Formals',
     category: 'Women',
+    mrp: 5499,
     price: 3999,
     description: 'Sophisticated formal heels crafted from premium leather. Features a comfortable block heel and elegant pointed toe.',
     images: [
       'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600&h=600&fit=crop',
       'https://images.unsplash.com/photo-1515347619252-60a4bf4fff4f?w=600&h=600&fit=crop'
     ],
-    sizes: { 6: 10, 7: 8, 8: 6, 9: 4, 10: 2 }
+    sizes: { 5: 6, 6: 10, 7: 8, 8: 6, 9: 4, 10: 2 }
   },
   {
     id: 7,
     name: 'Blossom Sneaker',
     type: 'Sneakers',
     category: 'Women',
+    mrp: 3599,
     price: 2599,
     description: 'Stylish women\'s sneakers with floral accents and memory foam insole. Perfect blend of fashion and comfort.',
     images: [
       'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&h=600&fit=crop',
       'https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=600&h=600&fit=crop'
     ],
-    sizes: { 6: 12, 7: 15, 8: 10, 9: 8, 10: 3 }
+    sizes: { 5: 8, 6: 12, 7: 15, 8: 10, 9: 8, 10: 3 }
   },
   {
     id: 8,
     name: 'Velvet Comfort Slippers',
     type: 'Slippers',
     category: 'Women',
+    mrp: 1199,
     price: 799,
     description: 'Plush velvet indoor slippers with anti-slip sole. Wrapped in luxury for your home comfort.',
     images: [
       'https://images.unsplash.com/photo-1603487742131-4160ec999306?w=600&h=600&fit=crop',
       'https://images.unsplash.com/photo-1575537302964-96cd47c06b1b?w=600&h=600&fit=crop'
     ],
-    sizes: { 6: 18, 7: 20, 8: 15, 9: 10, 10: 5 }
+    sizes: { 5: 10, 6: 18, 7: 20, 8: 15, 9: 10, 10: 5 }
   },
   {
     id: 9,
     name: 'Boho Chic Sandals',
     type: 'Sandals',
     category: 'Women',
+    mrp: 2699,
     price: 1899,
     description: 'Handcrafted bohemian-style sandals with beaded straps and cork footbed. Perfect for summer vibes.',
     images: [
       'https://images.unsplash.com/photo-1562183241-b937e95585b6?w=600&h=600&fit=crop',
       'https://images.unsplash.com/photo-1603487742131-4160ec999306?w=600&h=600&fit=crop'
     ],
-    sizes: { 6: 7, 7: 12, 8: 8, 9: 5, 10: 0 }
+    sizes: { 5: 5, 6: 7, 7: 12, 8: 8, 9: 5, 10: 0 }
   },
 
   // ===== KIDS =====
@@ -129,6 +138,7 @@ const PRODUCTS = [
     name: 'Little Champ Sneakers',
     type: 'Sneakers',
     category: 'Kids',
+    mrp: 2199,
     price: 1499,
     description: 'Colorful lightweight sneakers for active kids. Extra cushioning and easy velcro closure with fun designs.',
     images: [
@@ -142,6 +152,7 @@ const PRODUCTS = [
     name: 'Tiny Explorer Sandals',
     type: 'Sandals',
     category: 'Kids',
+    mrp: 1499,
     price: 999,
     description: 'Durable kids\' sandals with protective toe cap and adjustable straps. Built for adventure and playtime.',
     images: [
@@ -155,6 +166,7 @@ const PRODUCTS = [
     name: 'School Day Formals',
     type: 'Formals',
     category: 'Kids',
+    mrp: 2499,
     price: 1799,
     description: 'Smart formal shoes for school and special occasions. Polished faux-leather with comfortable padded insole.',
     images: [
@@ -168,6 +180,7 @@ const PRODUCTS = [
     name: 'Splash Proof Sliders',
     type: 'Sliders',
     category: 'Kids',
+    mrp: 899,
     price: 599,
     description: 'Waterproof sliders for kids in vibrant colors. Anti-slip sole for pool and beach safety.',
     images: [
@@ -181,6 +194,7 @@ const PRODUCTS = [
     name: 'Chunky Street Baggy',
     type: 'Baggy Shoes',
     category: 'Men',
+    mrp: 4299,
     price: 2999,
     description: 'Bold chunky platform baggy shoes with thick soles and oversized tongue. Stand out in the crowd.',
     images: [

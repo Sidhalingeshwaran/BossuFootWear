@@ -143,7 +143,7 @@
 .admin-table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 900px;
+    min-width: 1050px;
 }
 
 .admin-table th {
@@ -200,6 +200,13 @@
     font-weight: 600;
     border-radius: 12px;
     text-transform: uppercase;
+}
+
+.admin-mrp {
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-decoration: line-through;
+    font-size: 0.82rem;
 }
 
 .admin-price {

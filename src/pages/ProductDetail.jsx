@@ -41,10 +41,18 @@ export default function ProductDetail() {
     const totalStock = Object.values(product.sizes).reduce((a, b) => a + b, 0);
     const isOutOfStock = totalStock === 0;
 
+    // MRP / discount — graceful fallback for products without mrp
+    const mrp = product.mrp || null;
+    const hasDiscount = mrp && mrp > product.price;
+    const discountPercent = hasDiscount ? Math.round(((mrp - product.price) / mrp) * 100) : 0;
+
     // WhatsApp message
     const buildWhatsAppLink = () => {
         const sizeText = selectedSize ? `Size: ${selectedSize}` : 'Size: Not selected';
-        const message = `Hi Bossu Footwear! 🛒\n\nI would like to order:\n\n📦 Product: ${product.name}\n👟 Type: ${product.type}\n📏 ${sizeText}\n💰 Price: ₹${product.price.toLocaleString('en-IN')}\n\nPlease confirm availability and shipping details. Thank you!`;
+        const priceText = hasDiscount
+            ? `MRP: ₹${mrp.toLocaleString('en-IN')}\n💰 Offer Price: ₹${product.price.toLocaleString('en-IN')} (${discountPercent}% OFF)`
+            : `Price: ₹${product.price.toLocaleString('en-IN')}`;
+        const message = `Hi Bossu Footwear! 🛒\n\nI would like to order:\n\n📦 Product: ${product.name}\n👟 Type: ${product.type}\n📏 ${sizeText}\n💰 ${priceText}\n\nPlease confirm availability and shipping details. Thank you!`;
         return `https://wa.me/919894144712?text=${encodeURIComponent(message)}`;
     };
 
@@ -78,6 +86,9 @@ export default function ProductDetail() {
                                 className="main-img"
                             />
                             {isOutOfStock && <div className="detail-out-badge">Out of Stock</div>}
+                            {hasDiscount && (
+                                <div className="detail-discount-badge">{discountPercent}% OFF</div>
+                            )}
                         </div>
                         <div className="detail-thumbnails">
                             {product.images.map((img, i) => (
@@ -101,8 +112,20 @@ export default function ProductDetail() {
 
                         <h1 className="detail-name">{product.name}</h1>
 
-                        <div className="detail-price">
-                            ₹{product.price.toLocaleString('en-IN')}
+                        <div className="detail-price-section">
+                            <span className="detail-price">
+                                ₹{product.price.toLocaleString('en-IN')}
+                            </span>
+                            {hasDiscount && (
+                                <>
+                                    <span className="detail-mrp">
+                                        ₹{mrp.toLocaleString('en-IN')}
+                                    </span>
+                                    <span className="detail-discount">
+                                        {discountPercent}% OFF
+                                    </span>
+                                </>
+                            )}
                         </div>
 
                         <p className="detail-desc">{product.description}</p>

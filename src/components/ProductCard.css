@@ -61,6 +61,20 @@
     z-index: 2;
 }
 
+.pc-discount-badge {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    padding: 4px 10px;
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    border-radius: 4px;
+    letter-spacing: 0.3px;
+    z-index: 2;
+}
+
 .pc-category-tag {
     position: absolute;
     top: 12px;
@@ -111,10 +125,23 @@
     justify-content: space-between;
 }
 
+.pc-price-group {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
 .pc-price {
     font-size: 1.1rem;
     font-weight: 700;
     color: var(--color-text);
+}
+
+.pc-mrp {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-decoration: line-through;
 }
 
 .pc-stock {

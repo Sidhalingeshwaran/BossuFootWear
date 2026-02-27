@@ -5,6 +5,11 @@ export default function ProductCard({ product }) {
     const totalStock = Object.values(product.sizes).reduce((a, b) => a + b, 0);
     const isOutOfStock = totalStock === 0;
 
+    // Graceful fallback: if mrp doesn't exist, don't show strikethrough
+    const mrp = product.mrp || null;
+    const hasDiscount = mrp && mrp > product.price;
+    const discountPercent = hasDiscount ? Math.round(((mrp - product.price) / mrp) * 100) : 0;
+
     return (
         <Link to={`/product/${product.id}`} className="product-card glass-card">
             <div className="pc-image-wrapper">
@@ -23,6 +28,9 @@ export default function ProductCard({ product }) {
                     />
                 )}
                 {isOutOfStock && <div className="pc-out-badge">Out of Stock</div>}
+                {hasDiscount && (
+                    <div className="pc-discount-badge">{discountPercent}% OFF</div>
+                )}
                 <div className="pc-category-tag">{product.category}</div>
             </div>
 
@@ -30,7 +38,12 @@ export default function ProductCard({ product }) {
                 <span className="pc-type">{product.type}</span>
                 <h3 className="pc-name">{product.name}</h3>
                 <div className="pc-bottom">
-                    <span className="pc-price">₹{product.price.toLocaleString('en-IN')}</span>
+                    <div className="pc-price-group">
+                        <span className="pc-price">₹{product.price.toLocaleString('en-IN')}</span>
+                        {hasDiscount && (
+                            <span className="pc-mrp">₹{mrp.toLocaleString('en-IN')}</span>
+                        )}
+                    </div>
                     <span className={`pc-stock ${isOutOfStock ? 'out' : ''}`}>
                         {isOutOfStock ? 'Sold Out' : `${totalStock} in stock`}
                     </span>

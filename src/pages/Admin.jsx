@@ -26,10 +26,12 @@ export default function Admin() {
         name: '',
         type: 'Sneakers',
         category: 'Men',
+        mrp: '',
         price: '',
         description: '',
         image1: '',
         image2: '',
+        size5: '0',
         size6: '10',
         size7: '10',
         size8: '10',
@@ -66,10 +68,12 @@ export default function Admin() {
             name: form.name,
             type: form.type,
             category: form.category,
+            mrp: Number(form.mrp) || Number(form.price),
             price: Number(form.price),
             description: form.description,
             images: [form.image1, form.image2 || form.image1],
             sizes: {
+                5: Number(form.size5) || 0,
                 6: Number(form.size6) || 0,
                 7: Number(form.size7) || 0,
                 8: Number(form.size8) || 0,
@@ -86,10 +90,12 @@ export default function Admin() {
             name: '',
             type: 'Sneakers',
             category: 'Men',
+            mrp: '',
             price: '',
             description: '',
             image1: '',
             image2: '',
+            size5: '0',
             size6: '10',
             size7: '10',
             size8: '10',
@@ -210,7 +216,9 @@ export default function Admin() {
                                             <th>Product</th>
                                             <th>Type</th>
                                             <th>Category</th>
+                                            <th>MRP</th>
                                             <th>Price</th>
+                                            <th>Size 5</th>
                                             <th>Size 6</th>
                                             <th>Size 7</th>
                                             <th>Size 8</th>
@@ -234,14 +242,17 @@ export default function Admin() {
                                                 </td>
                                                 <td><span className="admin-badge">{product.type}</span></td>
                                                 <td>{product.category}</td>
+                                                <td className="admin-mrp">
+                                                    {product.mrp ? `₹${product.mrp.toLocaleString('en-IN')}` : '—'}
+                                                </td>
                                                 <td className="admin-price">₹{product.price.toLocaleString('en-IN')}</td>
-                                                {[6, 7, 8, 9, 10].map((size) => (
+                                                {[5, 6, 7, 8, 9, 10].map((size) => (
                                                     <td key={size}>
                                                         <input
                                                             type="number"
                                                             className="stock-input"
                                                             min="0"
-                                                            value={product.sizes[size] || 0}
+                                                            value={product.sizes[size] ?? 0}
                                                             onChange={(e) => handleStockChange(product.id, size, e.target.value)}
                                                         />
                                                     </td>
@@ -282,11 +293,22 @@ export default function Admin() {
                                 </div>
 
                                 <div className="form-group">
-                                    <label>Price (₹) *</label>
+                                    <label>MRP (₹)</label>
                                     <input
                                         type="number"
                                         className="form-input"
-                                        placeholder="e.g. 2499"
+                                        placeholder="e.g. 4999"
+                                        value={form.mrp}
+                                        onChange={(e) => setForm({ ...form, mrp: e.target.value })}
+                                    />
+                                </div>
+
+                                <div className="form-group">
+                                    <label>Offer Price (₹) *</label>
+                                    <input
+                                        type="number"
+                                        className="form-input"
+                                        placeholder="e.g. 3499"
                                         value={form.price}
                                         onChange={(e) => setForm({ ...form, price: e.target.value })}
                                         required
@@ -356,7 +378,7 @@ export default function Admin() {
 
                             <h3 className="stock-heading">Stock per Size</h3>
                             <div className="stock-row">
-                                {[6, 7, 8, 9, 10].map((size) => (
+                                {[5, 6, 7, 8, 9, 10].map((size) => (
                                     <div key={size} className="stock-field">
                                         <label>Size {size}</label>
                                         <input
