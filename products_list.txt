@@ -1,0 +1,16 @@
+Total products in Firestore: 14
+
+1. [Men] Royal Oxford Classic — ₹3499 (MRP: ₹4498)
+2. [Kids] Little Champ Sneakers — ₹1499 (MRP: ₹2498)
+3. [Kids] Tiny Explorer Sandals — ₹999 (MRP: ₹1898)
+4. [Kids] School Day Formals — ₹1799 (MRP: ₹2698)
+5. [Kids] Splash Proof Sliders — ₹599 (MRP: ₹1598)
+6. [Men] Chunky Street Baggy — ₹2999 (MRP: ₹3898)
+7. [Men] Urban Runner Pro — ₹2799 (MRP: ₹3798)
+8. [Men] Baggy Street King — ₹2299 (MRP: ₹3198)
+9. [Men] Comfort Cloud Slides — ₹899 (MRP: ₹1798)
+10. [Men] Heritage Leather Sandals — ₹1599 (MRP: ₹2598)
+11. [Women] Elegance Stiletto — ₹3999 (MRP: ₹4998)
+12. [Women] Blossom Sneaker — ₹2599 (MRP: ₹3498)
+13. [Women] Velvet Comfort Slippers — ₹799 (MRP: ₹1698)
+14. [Women] Boho Chic Sandals — ₹1899 (MRP: ₹2898)

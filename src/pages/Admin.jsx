@@ -29,6 +29,7 @@ export default function Admin() {
         mrp: '',
         price: '',
         description: '',
+        navigationLink: '',
         image1: '',
         image2: '',
         size5: '0',
@@ -71,6 +72,7 @@ export default function Admin() {
             mrp: Number(form.mrp) || (Number(form.price) + [899, 999, 1299][Math.floor(Math.random() * 3)]),
             price: Number(form.price),
             description: form.description,
+            navigationLink: form.navigationLink || '',
             images: [form.image1, form.image2 || form.image1],
             sizes: {
                 5: Number(form.size5) || 0,
@@ -93,6 +95,7 @@ export default function Admin() {
             mrp: '',
             price: '',
             description: '',
+            navigationLink: '',
             image1: '',
             image2: '',
             size5: '0',
@@ -218,6 +221,7 @@ export default function Admin() {
                                             <th>Category</th>
                                             <th>MRP</th>
                                             <th>Price</th>
+                                            <th>Link</th>
                                             <th>Size 5</th>
                                             <th>Size 6</th>
                                             <th>Size 7</th>
@@ -246,6 +250,21 @@ export default function Admin() {
                                                     {product.mrp ? `₹${product.mrp.toLocaleString('en-IN')}` : '—'}
                                                 </td>
                                                 <td className="admin-price">₹{product.price.toLocaleString('en-IN')}</td>
+                                                <td>
+                                                    {product.navigationLink ? (
+                                                        <a
+                                                            href={product.navigationLink}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="admin-nav-link"
+                                                            title={product.navigationLink}
+                                                        >
+                                                            🔗 View
+                                                        </a>
+                                                    ) : (
+                                                        <span className="admin-no-link">—</span>
+                                                    )}
+                                                </td>
                                                 {[5, 6, 7, 8, 9, 10].map((size) => (
                                                     <td key={size}>
                                                         <input
@@ -349,6 +368,17 @@ export default function Admin() {
                                         placeholder="Product description..."
                                         value={form.description}
                                         onChange={(e) => setForm({ ...form, description: e.target.value })}
+                                    />
+                                </div>
+
+                                <div className="form-group form-full">
+                                    <label>Navigation Link (Meesho / External URL)</label>
+                                    <input
+                                        type="url"
+                                        className="form-input"
+                                        placeholder="https://www.meesho.com/your-product-link"
+                                        value={form.navigationLink}
+                                        onChange={(e) => setForm({ ...form, navigationLink: e.target.value })}
                                     />
                                 </div>
 
