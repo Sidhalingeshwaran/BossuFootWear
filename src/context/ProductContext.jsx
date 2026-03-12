@@ -26,20 +26,8 @@ export function ProductProvider({ children }) {
 
         const unsubscribe = onSnapshot(productsRef, async (snapshot) => {
             if (snapshot.empty) {
-                // First time: seed Firestore with default products
-                try {
-                    const batch = writeBatch(db);
-                    INITIAL_PRODUCTS.forEach((product) => {
-                        const docRef = doc(productsRef, String(product.id));
-                        batch.set(docRef, product);
-                    });
-                    await batch.commit();
-                    // onSnapshot will fire again after seeding — products will load then
-                } catch (e) {
-                    console.error('Error seeding products:', e);
-                    // Fallback to hardcoded data if Firestore fails
-                    setProducts(INITIAL_PRODUCTS);
-                }
+                // No products yet — admin can add them via the panel
+                setProducts([]);
             } else {
                 const productsData = snapshot.docs.map((doc) => ({
                     ...doc.data(),
@@ -74,8 +62,8 @@ export function ProductProvider({ children }) {
             setLoading(false);
         }, (error) => {
             console.error('Firestore listener error:', error);
-            // Fallback to hardcoded data
-            setProducts(INITIAL_PRODUCTS);
+            // Fallback to empty list
+            setProducts([]);
             setLoading(false);
         });
 
@@ -158,14 +146,6 @@ export function ProductProvider({ children }) {
             const batch = writeBatch(db);
             snapshot.docs.forEach((doc) => batch.delete(doc.ref));
             await batch.commit();
-
-            // Re-seed with defaults
-            const seedBatch = writeBatch(db);
-            INITIAL_PRODUCTS.forEach((product) => {
-                const docRef = doc(productsRef, String(product.id));
-                seedBatch.set(docRef, product);
-            });
-            await seedBatch.commit();
         } catch (e) {
             console.error('Error resetting products:', e);
         }
