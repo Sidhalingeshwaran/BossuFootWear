@@ -25,19 +25,19 @@ export default function Home() {
             name: 'Men',
             emoji: '👞',
             desc: 'Formal, casual & sporty',
-            image: 'https://images.unsplash.com/photo-1614252369475-531eba835eb1?w=600&h=400&fit=crop',
+            image: 'https://static.vecteezy.com/system/resources/thumbnails/049/174/246/small/a-smiling-young-indian-man-with-formal-shirts-outdoors-photo.jpg',
         },
         {
             name: 'Women',
             emoji: '👠',
             desc: 'Elegant, trendy & comfortable',
-            image: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600&h=400&fit=crop',
+            image: 'https://static.vecteezy.com/system/resources/thumbnails/038/534/919/small/ai-generated-smiley-indian-woman-radiating-joy-in-a-medium-shot-photo.jpg',
         },
         {
             name: 'Kids',
             emoji: '👟',
             desc: 'Fun, durable & playful',
-            image: 'https://images.unsplash.com/photo-1514989940723-e8e51635b782?w=600&h=400&fit=crop',
+            image: 'https://t4.ftcdn.net/jpg/14/24/51/47/360_F_1424514793_85CPo5TDaV9OnDuAgxcxoloROK0NFWlv.jpg',
         },
     ];
 
