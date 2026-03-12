@@ -9,6 +9,7 @@ export default function Admin() {
         products,
         loading,
         addProduct,
+        updateProduct,
         deleteProduct,
         updateStock,
         resetProducts,
@@ -20,6 +21,7 @@ export default function Admin() {
 
     const [activeTab, setActiveTab] = useState('products'); // products | add
     const [successMsg, setSuccessMsg] = useState('');
+    const [editingProduct, setEditingProduct] = useState(null); // null = add mode, product = edit mode
 
     // Add Product Form
     const [form, setForm] = useState({
@@ -58,6 +60,83 @@ export default function Admin() {
         setTimeout(() => setSuccessMsg(''), 3000);
     };
 
+    const defaultForm = {
+        name: '',
+        type: 'Sneakers',
+        category: 'Men',
+        mrp: '',
+        price: '',
+        description: '',
+        navigationLink: '',
+        image1: '',
+        image2: '',
+        size5: '0',
+        size6: '10',
+        size7: '10',
+        size8: '10',
+        size9: '10',
+        size10: '10',
+    };
+
+    const handleEditProduct = (product) => {
+        setEditingProduct(product);
+        setForm({
+            name: product.name || '',
+            type: product.type || 'Sneakers',
+            category: product.category || 'Men',
+            mrp: product.mrp ? String(product.mrp) : '',
+            price: product.price ? String(product.price) : '',
+            description: product.description || '',
+            navigationLink: product.navigationLink || '',
+            image1: product.images?.[0] || '',
+            image2: product.images?.[1] || '',
+            size5: String(product.sizes?.[5] ?? 0),
+            size6: String(product.sizes?.[6] ?? 10),
+            size7: String(product.sizes?.[7] ?? 10),
+            size8: String(product.sizes?.[8] ?? 10),
+            size9: String(product.sizes?.[9] ?? 10),
+            size10: String(product.sizes?.[10] ?? 10),
+        });
+        setActiveTab('add');
+    };
+
+    const handleUpdateProduct = async (e) => {
+        e.preventDefault();
+        if (!form.name || !form.price || !form.image1) {
+            alert('Please fill in at least name, price, and image 1.');
+            return;
+        }
+
+        const updates = {
+            name: form.name,
+            type: form.type,
+            category: form.category,
+            mrp: Number(form.mrp) || editingProduct.mrp,
+            price: Number(form.price),
+            description: form.description,
+            navigationLink: form.navigationLink || '',
+            images: [form.image1, form.image2 || form.image1],
+            sizes: {
+                5: Number(form.size5) || 0,
+                6: Number(form.size6) || 0,
+                7: Number(form.size7) || 0,
+                8: Number(form.size8) || 0,
+                9: Number(form.size9) || 0,
+                10: Number(form.size10) || 0,
+            },
+        };
+
+        await updateProduct(editingProduct.id, updates);
+        showSuccess(`"${form.name}" updated successfully!`);
+        cancelEdit();
+    };
+
+    const cancelEdit = () => {
+        setEditingProduct(null);
+        setForm(defaultForm);
+        setActiveTab('products');
+    };
+
     const handleAddProduct = (e) => {
         e.preventDefault();
         if (!form.name || !form.price || !form.image1) {
@@ -86,25 +165,7 @@ export default function Admin() {
 
         addProduct(product);
         showSuccess(`"${form.name}" added successfully!`);
-
-        // Reset form
-        setForm({
-            name: '',
-            type: 'Sneakers',
-            category: 'Men',
-            mrp: '',
-            price: '',
-            description: '',
-            navigationLink: '',
-            image1: '',
-            image2: '',
-            size5: '0',
-            size6: '10',
-            size7: '10',
-            size8: '10',
-            size9: '10',
-            size10: '10',
-        });
+        setForm(defaultForm);
     };
 
     const handleStockChange = (productId, size, value) => {
@@ -277,12 +338,22 @@ export default function Admin() {
                                                     </td>
                                                 ))}
                                                 <td>
-                                                    <button
-                                                        className="btn btn-danger btn-sm"
-                                                        onClick={() => handleDelete(product)}
-                                                    >
-                                                        🗑️
-                                                    </button>
+                                                    <div className="admin-actions-cell">
+                                                        <button
+                                                            className="btn btn-edit btn-sm"
+                                                            onClick={() => handleEditProduct(product)}
+                                                            title="Edit product"
+                                                        >
+                                                            ✏️
+                                                        </button>
+                                                        <button
+                                                            className="btn btn-danger btn-sm"
+                                                            onClick={() => handleDelete(product)}
+                                                            title="Delete product"
+                                                        >
+                                                            🗑️
+                                                        </button>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         ))}
@@ -293,11 +364,18 @@ export default function Admin() {
                     </div>
                 )}
 
-                {/* === ADD PRODUCT TAB === */}
+                {/* === ADD / EDIT PRODUCT TAB === */}
                 {activeTab === 'add' && (
                     <div className="admin-add glass-card">
-                        <h2 className="add-title">Add New Product</h2>
-                        <form onSubmit={handleAddProduct} className="add-form">
+                        <div className="add-title-row">
+                            <h2 className="add-title">{editingProduct ? 'Edit Product' : 'Add New Product'}</h2>
+                            {editingProduct && (
+                                <button type="button" className="btn btn-secondary btn-sm" onClick={cancelEdit}>
+                                    ✕ Cancel Edit
+                                </button>
+                            )}
+                        </div>
+                        <form onSubmit={editingProduct ? handleUpdateProduct : handleAddProduct} className="add-form">
                             <div className="add-form-grid">
                                 <div className="form-group">
                                     <label>Product Name *</label>
@@ -422,8 +500,8 @@ export default function Admin() {
                                 ))}
                             </div>
 
-                            <button type="submit" className="btn btn-primary add-submit-btn">
-                                ➕ Add Product
+                            <button type="submit" className={`btn ${editingProduct ? 'btn-edit-submit' : 'btn-primary'} add-submit-btn`}>
+                                {editingProduct ? '💾 Save Changes' : '➕ Add Product'}
                             </button>
                         </form>
                     </div>

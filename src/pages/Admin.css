@@ -267,9 +267,43 @@
     font-size: 0.85rem;
 }
 
-/* Add Product */
+/* Add / Edit Product */
+.admin-actions-cell {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.btn-edit {
+    background: rgba(59, 130, 246, 0.12);
+    color: #60a5fa;
+    border: 1px solid rgba(59, 130, 246, 0.25);
+}
+
+.btn-edit:hover {
+    background: rgba(59, 130, 246, 0.25);
+}
+
+.btn-edit-submit {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: #fff;
+}
+
+.btn-edit-submit:hover {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
+}
+
 .admin-add {
     padding: 32px;
+}
+
+.add-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
 }
 
 .add-title {
@@ -277,7 +311,7 @@
     font-size: 1.3rem;
     font-weight: 600;
     color: var(--color-gold);
-    margin-bottom: 24px;
+    margin-bottom: 0;
 }
 
 .add-form-grid {
